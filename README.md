@@ -6,6 +6,8 @@ The start of an nREPL middleware that will spy on an nREPL connection
 and capture the results of evaluation for browsing in
 [REBL](https://github.com/cognitect-labs/REBL-distro).
 
+**NOTE: REBL requires a commercial license if it's to be used for commercial work**
+
 ## Installation
 
 Multiple setups should be possible.  Here we describe one way using
@@ -31,9 +33,19 @@ tools.deps.
 clj -A:nrepl:cider:rebl -m nrepl.cmdline --middleware '[nrebl.middleware/wrap-nrebl cider.nrepl/cider-middleware]'
 ```
 
+Then connect to your REPL, and run
+
+```
+(cognitect.rebl/ui)
+```
+
+You should now find this is enough for forms evaluated in
+nREPL to be evaluated by REBL for interactive browsing and inspection.
+
 ## Help Wanted
 
-There's lots that can be done to improve this.  Help & suggestions welcome.
+There's lots that can be done to improve this.  Help & suggestions
+welcome.
 
 ## License
 
