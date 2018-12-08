@@ -48,7 +48,7 @@ There's lots that can be done to improve this.  Help & suggestions welcome.
 
 ## License
 
-Copyright © 2018 FIXME
+Copyright © 2018 Rick Moynihan
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
