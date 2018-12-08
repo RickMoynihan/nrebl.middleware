@@ -41,7 +41,6 @@ Then connect to your REPL, and run
 ```
 
 You should now be able to evaluate forms and have REBL capture them.
-y
 
 ## Help Wanted
 
