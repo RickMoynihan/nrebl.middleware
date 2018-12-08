@@ -20,7 +20,8 @@ tools.deps.
 ```clojure
 {:aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.4.5"}}}
            :rebl {:extra-deps {
-	                  org.clojure/clojure {:mvn/version "1.10.0-RC2"}
+	                  org.clojure/clojure {:mvn/version "1.10.0-RC3"}
+                      rickmoynihan/rebl.middleware {:git/url "https://github.com/rickmoynihan/dev.middleware", :sha "123abcd549214b5cba04002b6875bdf59f9d88b6"}
                       org.clojure/core.async {:mvn/version "0.4.490"}
      	              com.cognitect/rebl {:local/root "<PATH-TO-REBL-JAR>/REBL-0.9.108/REBL-0.9.108.jar"}}}
            :cider {,,,} ;; configure cider/nrepl deps here
@@ -39,13 +40,12 @@ Then connect to your REPL, and run
 (cognitect.rebl/ui)
 ```
 
-You should now find this is enough for forms evaluated in
-nREPL to be evaluated by REBL for interactive browsing and inspection.
+You should now be able to evaluate forms and have REBL capture them.
+y
 
 ## Help Wanted
 
-There's lots that can be done to improve this.  Help & suggestions
-welcome.
+There's lots that can be done to improve this.  Help & suggestions welcome.
 
 ## License
 
