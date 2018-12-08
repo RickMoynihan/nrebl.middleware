@@ -9,9 +9,9 @@
   (:import
    nrepl.transport.Transport))
 
-(defn send-to-rebl! [{:keys [code] :as req} {:keys [value code] :as resp}]
+(defn send-to-rebl! [{:keys [code] :as req} {:keys [value] :as resp}]
   (when-let [value (datafy value)]
-    (rebl/inspect value))
+    (rebl/submit (read-string code) value))
   resp)
 
 (defn- wrap-rebl-sender
