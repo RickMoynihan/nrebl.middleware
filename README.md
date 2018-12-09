@@ -53,7 +53,8 @@ NOTE: the above configuration stores all `:nrebl` config in a single profile whi
            }}}}
 ```
 
-## Usage (tools.deps)
+
+## Usage
 
 ```
 clj -A:nrepl:cider:rebl -m nrepl.cmdline --middleware '[nrebl.middleware/wrap-nrebl cider.nrepl/cider-middleware]'
