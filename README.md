@@ -20,11 +20,11 @@ Assuming you're running a recent leiningen (2.8.3) follow the steps:
          :dependencies [[rickmoynihan/nrebl.middleware "0.1.0-SNAPSHOT"] ;; set this to the latest nrebl version
                         [org.clojure/core.async "0.4.490"]]
          :resource-paths ["/Users/rick/Software/rebl/REBL-0.9.109.jar"] ;; set this to where your REBL jar is installed
-         :injections [(require '[cognitect.rebl :as rebl])] 
+         :injections [(require '[cognitect.rebl :as rebl])]
          }
 
  :user [:nrebl
-        ;;:other-tool-profiles...]	
+        ;;:other-tool-profiles...]
 ```
 
 NOTE: the above configuration stores all `:nrebl` config in a single profile which is then merged into the `:user` profile, which will be available in dev/repl environments.  It is usually cleaner to do it this way as it makes it explicit what configuration belongs to each tool.
@@ -46,7 +46,7 @@ NOTE: the above configuration stores all `:nrebl` config in a single profile whi
 {:aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.4.5"}}}
            :rebl {:extra-deps {
 	                  org.clojure/clojure {:mvn/version "1.10.0-RC3"}
-                      rickmoynihan/rebl.middleware {:git/url "git@github.com:RickMoynihan/nrebl.middleware.git", :sha "6f37f09fef0df14b855b443838f7dcc0ff6fd1d1"}
+                      rickmoynihan/nrebl.middleware {:git/url "https://github.com/rickmoynihan/dev.middleware", :sha "6f37f09fef0df14b855b443838f7dcc0ff6fd1d1"}
                       org.clojure/core.async {:mvn/version "0.4.490"}
      	              com.cognitect/rebl {:local/root "<PATH-TO-REBL-JAR>/REBL-0.9.108/REBL-0.9.108.jar"}}}
            :cider {,,,} ;; configure cider/nrepl deps here

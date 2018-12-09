@@ -1,13 +1,28 @@
 (ns nrebl.middleware
-  (:require [nrepl
-             [middleware :refer [set-descriptor!]]
-             [transport :as transport]]
-            [nrepl.middleware.interruptible-eval :as ev]
-            [cognitect.rebl.ui :as ui]
+  (:require [cognitect.rebl.ui :as ui]
             [cognitect.rebl :as rebl]
-            [clojure.datafy :refer [datafy]])
-  (:import
-   nrepl.transport.Transport))
+            [clojure.datafy :refer [datafy]]))
+
+(defn try-loading-new-nrepl! []
+  (require '[nrepl.middleware :refer [set-descriptor!]])
+  (require '[nrepl.transport :as transport])
+  (import '[nrepl.transport Transport])
+  true)
+
+(defn try-loading-old-nrepl! []
+  (require '[clojure.tools.nrepl.middleware :refer [set-descriptor!]])
+  (require '[clojure.tools.nrepl.transport :as transport])
+  (import '[clojure.tools.nrepl.transport Transport])
+  true)
+
+(or (try
+      (try-loading-new-nrepl!)
+      (catch java.io.FileNotFoundException _
+        false))
+    (try
+      (try-loading-old-nrepl!)
+      (catch java.io.FileNotFoundException _
+        false)))
 
 (defn send-to-rebl! [{:keys [code] :as req} {:keys [value] :as resp}]
   (when-let [value (datafy value)]
@@ -17,8 +32,8 @@
 (defn- wrap-rebl-sender
   "Wraps a `Transport` with code which prints the value of messages sent to
   it using the provided function."
-  [{:keys [id op ^Transport transport] :as request} ]
-  (reify Transport
+  [{:keys [id op ^Transport transport] :as request}]
+  (reify transport/Transport
     (recv [this]
       (.recv transport))
     (recv [this timeout]
