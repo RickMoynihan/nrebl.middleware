@@ -21,7 +21,7 @@ tools.deps.
 {:aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.4.5"}}}
            :rebl {:extra-deps {
 	                  org.clojure/clojure {:mvn/version "1.10.0-RC3"}
-                      rickmoynihan/rebl.middleware {:git/url "https://github.com/rickmoynihan/dev.middleware", :sha "6f37f09fef0df14b855b443838f7dcc0ff6fd1d1"}
+                      rickmoynihan/rebl.middleware {:git/url "git@github.com:RickMoynihan/nrebl.middleware.git", :sha "6f37f09fef0df14b855b443838f7dcc0ff6fd1d1"}
                       org.clojure/core.async {:mvn/version "0.4.490"}
      	              com.cognitect/rebl {:local/root "<PATH-TO-REBL-JAR>/REBL-0.9.108/REBL-0.9.108.jar"}}}
            :cider {,,,} ;; configure cider/nrepl deps here
