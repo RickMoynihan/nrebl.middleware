@@ -21,11 +21,29 @@ tools.deps.
 {:aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.4.5"}}}
            :rebl {:extra-deps {
 	                  org.clojure/clojure {:mvn/version "1.10.0-RC3"}
-                      rickmoynihan/rebl.middleware {:git/url "git@github.com:RickMoynihan/nrebl.middleware.git", :sha "6f37f09fef0df14b855b443838f7dcc0ff6fd1d1"}
+                      rickmoynihan/nrebl.middleware {:git/url "https://github.com/rickmoynihan/dev.middleware", :sha "6f37f09fef0df14b855b443838f7dcc0ff6fd1d1"}
                       org.clojure/core.async {:mvn/version "0.4.490"}
      	              com.cognitect/rebl {:local/root "<PATH-TO-REBL-JAR>/REBL-0.9.108/REBL-0.9.108.jar"}}}
            :cider {,,,} ;; configure cider/nrepl deps here
            }}}}
+```
+
+## Leiningen Installation
+
+Add something like the following to your lein `project.clj`
+
+```clojure
+ :nrepl {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]
+                        ;; If you would like the REBL ui to start on repl init
+                        :init (do (println "Starting cognitect.rebl/ui...")
+                                  (cognitect.rebl/ui))})}
+         :dependencies [[rickmoynihan/nrebl.middleware "0.1.0-SNAPSHOT"]
+                        [org.clojure/core.async "0.4.490"]]
+
+         ;; Download REBL and add to :resource-paths
+         :resource-paths ["/Users/rick/Software/REBL-0.9.108/REBL-0.9.108.jar"]}
+
+ :repl [:nrebl]
 ```
 
 ## Usage
@@ -34,10 +52,16 @@ tools.deps.
 clj -A:nrepl:cider:rebl -m nrepl.cmdline --middleware '[nrebl.middleware/wrap-nrebl cider.nrepl/cider-middleware]'
 ```
 
-Then connect to your REPL, and run
+Then connect to your REPL. The REBL UI should display automatically but you can always run it manually:
 
 ```
 (cognitect.rebl/ui)
+```
+
+For leiningen users:
+
+```
+lein repl
 ```
 
 You should now be able to evaluate forms and have REBL capture them.
