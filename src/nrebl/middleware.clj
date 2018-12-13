@@ -5,7 +5,8 @@
             [nrepl.middleware.interruptible-eval :as ev]
             [cognitect.rebl.ui :as ui]
             [cognitect.rebl :as rebl]
-            [clojure.datafy :refer [datafy]])
+            [clojure.datafy :refer [datafy]]
+            [clojure.string :refer [starts-with?]])
   (:import
    nrepl.transport.Transport))
 
@@ -14,18 +15,28 @@
     (rebl/submit (read-string code) value))
   resp)
 
+
+(defn- cursive?
+  "Takes an nREPL request and returns true if a noisy cursive eval request."
+  [request]
+  (and (= (get request :op) "eval")
+       (starts-with? (get request :code) "(cursive.repl")))
+
 (defn- wrap-rebl-sender
   "Wraps a `Transport` with code which prints the value of messages sent to
   it using the provided function."
-  [{:keys [id op ^Transport transport] :as request} ]
+  [{:keys [id op ^Transport transport] :as request}]
   (reify Transport
     (recv [this]
       (.recv transport))
     (recv [this timeout]
       (.recv transport timeout))
-    (send [this resp]
+    (send [this response]
       (.send transport
-             (send-to-rebl! request resp))
+             ;; Filter out noisy cursive requests
+             (if (cursive? request)
+               response
+               (send-to-rebl! request response)))
       this)))
 
 (defn wrap-nrebl [handler]
