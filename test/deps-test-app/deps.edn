@@ -1,0 +1,4 @@
+{:aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.4.5"}}}
+           :rebl {:extra-deps {org.clojure/clojure {:mvn/version "1.10.0-RC3"}
+                               rickmoynihan/rebl.middleware {:local/root "../.."}
+                               org.clojure/core.async {:mvn/version "0.4.490"}}}}}
