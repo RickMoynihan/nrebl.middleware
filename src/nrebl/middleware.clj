@@ -22,6 +22,13 @@
   (and (= (get request :op) "eval")
        (starts-with? (get request :code) "(cursive.repl")))
 
+(defn- proto-repl?
+  "Takes an nREPL request and returns true if a noisy proto-repl eval request"
+  [request]
+  (and (= (get request :op) "eval")
+       (starts-with? (get request :code)
+                     "(do (require 'compliment.core) (let [completions ")))
+
 (defn- wrap-rebl-sender
   "Wraps a `Transport` with code which prints the value of messages sent to
   it using the provided function."
@@ -33,10 +40,11 @@
       (.recv transport timeout))
     (send [this response]
       (.send transport
-             ;; Filter out noisy cursive requests
-             (if (cursive? request)
-               response
-               (send-to-rebl! request response)))
+             ;; Filter out noisy editor requests
+             (cond
+               (cursive? request) response
+               (proto-repl? request) response
+               :else (send-to-rebl! request response)))
       this)))
 
 (defn wrap-nrebl [handler]
