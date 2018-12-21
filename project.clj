@@ -10,7 +10,6 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
              :test {:main ^:skip-aot nrebl.middleware
-                    :dependencies [[org.clojure/clojure "1.10.0-RC4"]
+                    :dependencies [[org.clojure/clojure "1.10.0"]
                                    [org.clojure/core.async "0.4.490"]
-                                   [nrepl "0.4.5"]]
-                    :resource-paths ["resources/REBL-0.9.109.jar"]}})
+                                   [nrepl "0.5.3"]]}})
