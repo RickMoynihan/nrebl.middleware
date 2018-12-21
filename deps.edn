@@ -1,9 +1,8 @@
 {:paths ["resources" "src"]
  :deps {org.clojure/clojure {:mvn/version "RELEASE"}
-        nrepl/nrepl {:mvn/version "0.4.5"}}
+        nrepl/nrepl {:mvn/version "0.5.3"}}
 
  :aliases
- {:dev {:extra-deps {org.clojure/clojure {:mvn/version "1.10.0-RC3"}
+ {:dev {:extra-deps {org.clojure/clojure {:mvn/version "1.10.0"}
                      org.clojure/core.async {:mvn/version "0.4.490"}
-	             com.cognitect/rebl {:local/root "/Users/rick/Software/REBL-0.9.108/REBL-0.9.108.jar"}}}
-  }}
+                     com.cognitect/rebl {:local/root "/Users/rick/Software/REBL-0.9.108/REBL-0.9.108.jar"}}}}}
