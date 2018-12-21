@@ -1,17 +1,8 @@
 (ns nrebl.middleware
   (:require [clojure.datafy :refer [datafy]]
-            [cognitect.rebl :as rebl]))
-
-  ;; Looks for legacy leiningen namespace and imports relevant resources
-(if (find-ns 'clojure.tools.nrepl)
-  (do (require
-       '[clojure.tools.nrepl.middleware :refer [set-descriptor!]])
-      (import
-       'clojure.tools.nrepl.transport.Transport))
-  (do (require
-       '[nrepl.middleware :refer [set-descriptor!]])
-      (import
-       'nrepl.transport.Transport)))
+            [nrepl.middleware :refer [set-descriptor!]]
+            [cognitect.rebl :as rebl])
+  (:import nrepl.transport.Transport))
 
 (defn send-to-rebl!
   "Displays evaluated code in REBL results.
