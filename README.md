@@ -15,7 +15,7 @@ Assuming you're running a recent leiningen (2.8.3) follow the steps:
 1. Install REBL to a known path.
 2. Add the following to your `~/.lein/profiles.clj` `:user` profile:
 
-```
+```clojure
  :user  {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}
          :dependencies [[rickmoynihan/nrebl.middleware "0.1.0-SNAPSHOT"] ;; set this to the latest nrebl version
                         [org.clojure/core.async "0.4.490"]]
@@ -28,7 +28,7 @@ Assuming you're running a recent leiningen (2.8.3) follow the steps:
 
 Whilst the above is the simplest layout, it can be preferable to instead put the above profile configuration into an `:nrebl` profile, and then merge that into `:user`.  This can help to organise your profiles more cleanly and aide in debugging profile issues.  This setup would then look something like this:
 
-```
+```clojure
  :nrebl  {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}
          :dependencies [[rickmoynihan/nrebl.middleware "0.1.0-SNAPSHOT"] ;; set this to the latest nrebl version
                         [org.clojure/core.async "0.4.490"]]
