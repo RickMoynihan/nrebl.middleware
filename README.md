@@ -13,20 +13,7 @@ and capture the results of evaluation for browsing in
 Assuming you're running a recent leiningen (2.8.3) follow the steps:
 
 1. Install REBL to a known path.
-2. Add the following to your `~/.lein/profiles.clj` `:user` profile:
-
-```clojure
- :user  {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}
-         :dependencies [[rickmoynihan/nrebl.middleware "0.1.0-SNAPSHOT"] ;; set this to the latest nrebl version
-                        [org.clojure/core.async "0.4.490"]]
-         :resource-paths ["/Users/rick/Software/rebl/REBL-0.9.109.jar"] ;; set this to where your REBL jar is installed
-         :injections [(require '[cognitect.rebl :as rebl])] 
-         }
-```
-
-3. Ensure `:resource-paths` in the snippet you inserted above is set to the fully qualified location for where your REBL `.jar` file can be found.
-
-Whilst the above is the simplest layout, it can be preferable to instead put the above profile configuration into an `:nrebl` profile, and then merge that into `:user`.  This can help to organise your profiles more cleanly and aide in debugging profile issues.  This setup would then look something like this:
+2. Add the following to your `~/.lein/profiles.clj` file in order to configure nrebl as part of your `:user` profile:
 
 ```clojure
  :nrebl  {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}
@@ -39,6 +26,8 @@ Whilst the above is the simplest layout, it can be preferable to instead put the
  :user [:nrebl
         ;;:other-tool-profiles...]	
 ```
+
+NOTE: the above configuration stores all `:nrebl` config in a single profile which is then merged into the `:user` profile, which will be available in dev/repl environments.  It is usually cleaner to do it this way as it makes it explicit what configuration belongs to each tool.
 
 ## Usage (lein)
 
