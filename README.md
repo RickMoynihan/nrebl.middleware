@@ -8,10 +8,46 @@ and capture the results of evaluation for browsing in
 
 **NOTE: REBL requires a commercial license if it's to be used for commercial work**
 
-## Installation
+## Installation (leiningen)
 
-Multiple setups should be possible.  Here we describe one way using
-tools.deps.
+Assuming you're running a recent leiningen (2.8.3) follow the steps:
+
+1. Install REBL to a known path.
+2. Add the following to your `~/.lein/profiles.clj` `:user` profile:
+
+```
+ :user  {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}
+         :dependencies [[rickmoynihan/nrebl.middleware "0.1.0-SNAPSHOT"] ;; set this to the latest nrebl version
+                        [org.clojure/core.async "0.4.490"]]
+         :resource-paths ["/Users/rick/Software/rebl/REBL-0.9.109.jar"] ;; set this to where your REBL jar is installed
+         :injections [(require '[cognitect.rebl :as rebl])] 
+         }
+```
+
+3. Ensure `:resource-paths` in the snippet you inserted above is set to the fully qualified location for where your REBL `.jar` file can be found.
+
+Whilst the above is the simplest layout, it can be preferable to instead put the above profile configuration into an `:nrebl` profile, and then merge that into `:user`.  This can help to organise your profiles more cleanly and aide in debugging profile issues.  This setup would then look something like this:
+
+```
+ :nrebl  {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}
+         :dependencies [[rickmoynihan/nrebl.middleware "0.1.0-SNAPSHOT"] ;; set this to the latest nrebl version
+                        [org.clojure/core.async "0.4.490"]]
+         :resource-paths ["/Users/rick/Software/rebl/REBL-0.9.109.jar"] ;; set this to where your REBL jar is installed
+         :injections [(require '[cognitect.rebl :as rebl])] 
+         }
+
+ :user [:nrebl
+        ;;:other-tool-profiles...]	
+```
+
+## Usage (lein)
+
+1. Run `lein repl` and/or connect to  nREPL with your Editor.
+2. Evaluate `(rebl/ui)` (the :injections should make this available in every namespace)
+3. The REBL UI should appear
+4. Evaluate more forms in the REPL, they should each then appear in REBL.
+
+## Installation (tools.deps)
 
 1. Install [clojure](https://clojure.org/)
 2. Install REBL to a known path
@@ -28,7 +64,7 @@ tools.deps.
            }}}}
 ```
 
-## Usage
+## Usage (tools.deps)
 
 ```
 clj -A:nrepl:cider:rebl -m nrepl.cmdline --middleware '[nrebl.middleware/wrap-nrebl cider.nrepl/cider-middleware]'
