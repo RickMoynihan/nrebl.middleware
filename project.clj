@@ -1,4 +1,4 @@
-(defproject rickmoynihan/nrebl.middleware "0.2.0"
+(defproject rickmoynihan/nrebl.middleware "0.2.1-SNAPSHOT"
   :description "An nREPL and cider middleware for capturing and
   browsing data in REBL."
   :url "https://github.com/Swirrl/matcha"
