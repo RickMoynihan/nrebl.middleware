@@ -1,5 +1,7 @@
 # nrebl.middleware
 
+[![Clojars Project](https://img.shields.io/clojars/v/rickmoynihan/nrebl.middleware.svg)](https://clojars.org/rickmoynihan/nrebl.middleware)
+
 *VERY ALPHA*
 
 The start of an nREPL middleware that will spy on an nREPL connection
@@ -17,7 +19,7 @@ Assuming you're running a recent leiningen (2.8.3) follow the steps:
 
 ```clojure
  :nrebl  {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}
-         :dependencies [[rickmoynihan/nrebl.middleware "0.1.0-SNAPSHOT"] ;; set this to the latest nrebl version
+         :dependencies [[rickmoynihan/nrebl.middleware "0.2.0"] ;; set this to the latest nrebl version
                         [org.clojure/core.async "0.4.490"]]
          :resource-paths ["/Users/rick/Software/rebl/REBL-0.9.109.jar"] ;; set this to where your REBL jar is installed
          :injections [(require '[cognitect.rebl :as rebl])]
@@ -46,7 +48,7 @@ NOTE: the above configuration stores all `:nrebl` config in a single profile whi
 {:aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.4.5"}}}
            :rebl {:extra-deps {
 	                  org.clojure/clojure {:mvn/version "1.10.0-RC3"}
-                      rickmoynihan/nrebl.middleware {:git/url "https://github.com/rickmoynihan/dev.middleware", :sha "6f37f09fef0df14b855b443838f7dcc0ff6fd1d1"}
+                      rickmoynihan/nrebl.middleware {:mvn/version "0.2.0"}
                       org.clojure/core.async {:mvn/version "0.4.490"}
      	              com.cognitect/rebl {:local/root "<PATH-TO-REBL-JAR>/REBL-0.9.108/REBL-0.9.108.jar"}}}
            :cider {,,,} ;; configure cider/nrepl deps here
