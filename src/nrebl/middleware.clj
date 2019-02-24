@@ -25,8 +25,9 @@
         false)))
 
 (defn send-to-rebl! [{:keys [code] :as req} {:keys [value] :as resp}]
-  (when-let [value (datafy value)]
-    (rebl/submit (read-string code) value))
+  (when value
+    (rebl/submit (read-string code)
+                 (datafy (read-string value))))
   resp)
 
 (defn- wrap-rebl-sender
