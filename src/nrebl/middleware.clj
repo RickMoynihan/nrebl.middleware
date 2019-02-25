@@ -24,6 +24,14 @@
       (catch java.io.FileNotFoundException _
         false)))
 
+(def ^:private print-middleware
+  (some resolve '[;; ctn 0.2.13 and earlier
+                  clojure.tools.nrepl.middleware.pr-values/pr-values
+                  ;; nrepl 0.3.0 to 0.5.3
+                  nrepl.middleware.pr-values/pr-values
+                  ;; nrepl 0.6.0+
+                  nrepl.middleware.print/wrap-print]))
+
 (defn send-to-rebl! [{:keys [code] :as req} {:keys [value] :as resp}]
   (when-let [value (datafy value)]
     (rebl/submit (read-string code) value))
@@ -50,7 +58,7 @@
       (handler (assoc request :transport (wrap-rebl-sender request))))))
 
 (set-descriptor! #'wrap-nrebl
-                 {:requires #{}
+                 {:requires #{print-middleware}
                   :expects #{"eval"}
                   :handles {"start-rebl-ui" "Launch the REBL inspector and have it capture interactions over nREPL"}})
 
