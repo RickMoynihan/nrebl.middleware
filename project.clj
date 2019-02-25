@@ -12,6 +12,8 @@
                                        [org.clojure/core.async "0.4.490"]]
                         :resource-paths ["vendor/REBL-0.9.109.jar"]}
 
+             :repl {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}}
+
              :dev {:dependencies [[nrepl "0.5.3"]]} ;; Used by lein 2.8.3+
              :dev-old {:dependencies [[org.clojure/tools.nrepl "0.2.13"]]} ;; lein < 2.8.3
              }
