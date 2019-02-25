@@ -9,7 +9,12 @@
                         ["snapshots" :clojars]]
 
   :profiles {:provided {:dependencies [[org.clojure/clojure "1.10.0"]
-                                       [org.clojure/core.async "0.4.490"]]
+                                       [org.clojure/core.async "0.4.490"]
+                                       [org.openjfx/javafx-base "11.0.1"]
+                                       [org.openjfx/javafx-controls "11.0.1"]
+                                       [org.openjfx/javafx-fxml "11.0.1"]
+                                       [org.openjfx/javafx-swing "11.0.1"]
+                                       [org.openjfx/javafx-web "11.0.1"]]
                         :resource-paths ["vendor/REBL-0.9.109.jar"]}
 
              :dev {:dependencies [[nrepl "0.5.3"]]} ;; Used by lein 2.8.3+
