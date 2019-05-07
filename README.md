@@ -21,7 +21,7 @@ Assuming you're running a recent leiningen (2.8.3) follow the steps:
  :nrebl  {:repl-options {:nrepl-middleware [nrebl.middleware/wrap-nrebl]}
          :dependencies [[rickmoynihan/nrebl.middleware "0.2.0"] ;; set this to the latest nrebl version
                         [org.clojure/core.async "0.4.490"]]
-         :resource-paths ["/Users/rick/Software/rebl/REBL-0.9.109.jar"] ;; set this to where your REBL jar is installed
+         :resource-paths ["/Users/rick/Software/rebl/REBL-0.9.157.jar"] ;; set this to where your REBL jar is installed
          :injections [(require '[cognitect.rebl :as rebl])]
          }
 
@@ -47,10 +47,10 @@ NOTE: the above configuration stores all `:nrebl` config in a single profile whi
 ```clojure
 {:aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.4.5"}}}
            :rebl {:extra-deps {
-	                  org.clojure/clojure {:mvn/version "1.10.0-RC3"}
-                      rickmoynihan/nrebl.middleware {:mvn/version "0.2.0"}
-                      org.clojure/core.async {:mvn/version "0.4.490"}
-     	              com.cognitect/rebl {:local/root "<PATH-TO-REBL-JAR>/REBL-0.9.108/REBL-0.9.108.jar"}}}
+	           org.clojure/clojure {:mvn/version "1.10.0"}
+                   rickmoynihan/nrebl.middleware {:mvn/version "0.2.0"}
+                   org.clojure/core.async {:mvn/version "0.4.490"}
+     	           com.cognitect/rebl {:local/root "<PATH-TO-REBL-JAR>/REBL-0.9.108/REBL-0.9.157.jar"}}}
            :cider {,,,} ;; configure cider/nrepl deps here
            }}}}
 ```
