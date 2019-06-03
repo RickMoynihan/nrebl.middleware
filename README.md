@@ -59,7 +59,7 @@ NOTE: the above configuration stores all `:nrebl` config in a single profile whi
 ## Usage
 
 ```
-clj -A:nrepl:cider:rebl -m nrepl.cmdline --middleware '[nrebl.middleware/wrap-nrebl cider.nrepl/cider-middleware]'
+clj -A:nrepl:cider:rebl -m nrepl.cmdline --middleware '[nrebl.middleware/wrap-nrebl cider.nrepl/cider-middleware]' -i
 ```
 
 Then connect to your REPL, and run
@@ -68,7 +68,8 @@ Then connect to your REPL, and run
 (cognitect.rebl/ui)
 ```
 
-You should now be able to evaluate forms and have REBL capture them.
+You should now be able to evaluate forms (in your editor) and have REBL capture them. Adding the `-i` option to
+the `clj` command line also allows nrepl to capture evaluations from an interactive repl. 
 
 ## Help Wanted
 
