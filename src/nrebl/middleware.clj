@@ -34,7 +34,7 @@
 
 (defn send-to-rebl! [{:keys [code] :as req} {:keys [value] :as resp}]
   (when-let [value (datafy value)]
-    (rebl/submit (read-string code) value))
+    (rebl/submit (some-> code read-string) value))
   resp)
 
 (defn- wrap-rebl-sender
