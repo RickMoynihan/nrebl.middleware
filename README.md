@@ -59,10 +59,7 @@ and capture the results of evaluation for browsing in
              :main-opts ["-m" "cognitect.rebl"]}
 
              :cider {:extra-deps {cider/cider-nrepl {:mvn/version "0.22.1"
-                                  refactor-nrepl {:mvn/version "2.4.0"}}}}
- 				
-				
-           }}}}
+                                  refactor-nrepl {:mvn/version "2.4.0"}}}}}}}}
 ```
 
 ## Usage
@@ -72,6 +69,13 @@ Assuming OpenJDK 11:
 ```
 clj -R:nrepl:cider:rebl-11 -A:nrebl
 ```
+
+Or Oracle JDK 8:
+
+```
+clj -R:nrepl:cider:rebl-8 -A:nrebl
+```
+
 
 You should now be able to connect to your nREPL through your editor or via an nREPL client and have nREBL capture the evaluation of forms.
 
