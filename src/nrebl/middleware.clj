@@ -1,28 +1,11 @@
 (ns nrebl.middleware
-  (:require [cognitect.rebl.ui :as ui]
+  (:require [clojure.datafy :refer [datafy]]
             [cognitect.rebl :as rebl]
-            [clojure.datafy :refer [datafy]]))
-
-(defn try-loading-new-nrepl! []
-  (require '[nrepl.middleware :refer [set-descriptor!]])
-  (require '[nrepl.transport :as transport])
-  (import '[nrepl.transport Transport])
-  true)
-
-(defn try-loading-old-nrepl! []
-  (require '[clojure.tools.nrepl.middleware :refer [set-descriptor!]])
-  (require '[clojure.tools.nrepl.transport :as transport])
-  (import '[clojure.tools.nrepl.transport Transport])
-  true)
-
-(or (try
-      (try-loading-new-nrepl!)
-      (catch java.io.FileNotFoundException _
-        false))
-    (try
-      (try-loading-old-nrepl!)
-      (catch java.io.FileNotFoundException _
-        false)))
+            [cognitect.rebl.ui :as ui]
+            [nrepl.middleware.print :refer [wrap-print]]
+            [nrepl.middleware :refer [set-descriptor!]]
+            [nrepl.transport :as transport])
+  (:import [nrepl.transport Transport]))
 
 (defn send-to-rebl! [{:keys [code] :as req} {:keys [value] :as resp}]
   (and
@@ -52,7 +35,7 @@
       (handler (assoc request :transport (wrap-rebl-sender request))))))
 
 (set-descriptor! #'wrap-nrebl
-                 {:requires #{}
+                 {:requires #{#'wrap-print}
                   :expects #{"eval"}
                   :handles {"start-rebl-ui" "Launch the REBL inspector and have it capture interactions over nREPL"}})
 
