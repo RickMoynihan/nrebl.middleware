@@ -7,11 +7,10 @@
             [nrepl.transport :as transport])
   (:import [nrepl.transport Transport]))
 
+
 (defn send-to-rebl! [{:keys [code] :as req} {:keys [value] :as resp}]
-  (and
-    code
-    (when-let [value (datafy value)]
-      (rebl/submit (read-string code) value)))
+  (when (and code value)
+        (rebl/submit (read-string code) value))
   resp)
 
 (defn- wrap-rebl-sender
